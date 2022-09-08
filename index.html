@@ -5,10 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Welcome 2 cumsoftcumsoft</title>
-    <style></style>
+    <style>
+    #mydiv {
+  border-radius: 8px 8px 4px 4px;
+  width: 250px;
+  height: 250px;
+  z-index: 9;
+  position: absolute;
+  min-width: 200px;
+  min-height: 350px;
+  //background-color: transparent;
+   //resize: both;
+     //overflow: auto;
+}
+
+#mydivheader {
+  border-radius: 6px 6px 3px 3px;
+  border-color: #000;
+  border-style: solid;
+  border-width: 1px;
+  top: -619px;
+  left: 128px;
+  color: yellow;
+  width: calc(100% - 2px);
+  cursor: move;
+  height: 15px;
+  z-index: 10;
+  position: relative;
+  background-color: hotpink;
+   //resize: both;
+    // overflow: auto;
+}
+
+#content {
+  color:black;
+  border-radius: 0 0 6px 6px;
+  border-color: #000;
+  border-style: none solid solid solid;
+  border-width: 1px;
+  position: relative;
+  z-index: 11;
+  top: -619px;
+  left: 128px;
+   width: 250px;//calc(100% - 4px);
+   min-width: 250px;
+  max-width: 250px;
+  filter: blur(1px);
+  height: 350; //calc(100% - 2px);
+   min-height: 200px;
+  filter: drop-shadow(8px 14px 4px rgba(0, 0, 0, 0.4));
+  background-color: lightgray;
+   resize: both;
+     overflow: auto;
+}</style>
     <script src="index.js"></script>
   </head>
  <body>
+    
     <canvas id="running-text" height=800px width=700px></canvas>
     <script>
       const word_color_pairs={
@@ -77,5 +130,108 @@
       };
       startRunning(word_color_pairs,'#d9ead3',50);
     </script>
+<br><br><br>
+  <!-- Draggable DIV -->
+  <div id="mydiv">
+    <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
+    <div id="mydivheader">&nbsp;<b>Menu le cumsoft</b></div>
+    <div id="content" style="height: 100px;">
+     <br><br>
+     &nbsp;<a href="" target="">Here</a>   
+     &nbsp;<a href="" target="">Here</a>  
+     &nbsp;<a href="" target="">Here</a>
+     &nbsp;<a href="" target="">Here</a>  
+     &nbsp;<a href="" target="">Here</a>
+     &nbsp;<a href="" target="">Here</a> 
+     &nbsp;<a href="" target="">Here</a>
+     &nbsp;<a href="" target="">Here</a> 
+     &nbsp;<a href="" target="">Here</a>
+     &nbsp;<a href="" target="">Here</a>  
+     &nbsp;<a href="" target="">Here</a>
+     &nbsp;<a href="" target="">Here</a>   
+     &nbsp;<a href="" target="">Here</a>
+     &nbsp;<a href="" target="">Here</a>
+     &nbsp;<a href="" target="">Here</a>   
+     &nbsp;<a href="" target="">Here</a>
+     &nbsp;<a href="" target="">Here</a>  
+     &nbsp;<a href="" target="">Here</a>
+     &nbsp;<a href="" target="">Here</a>   
+     &nbsp;<a href="" target="">Here</a>
+     &nbsp;<a href="" target="">Here</a> 
+     &nbsp;<a href="" target="">Here</a>
+     &nbsp;<a href="" target="">Here</a>  
+     &nbsp;<a href="" target="">Here</a> 
+     &nbsp;<a href="" target="">More...</a><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <br><br>
+     <p>note</p>
+    </div>
+  </div>
+<script>
+  // Make the DIV element draggable:
+dragElement(document.getElementById("mydiv"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}</script> 
+<br><br><br><br>
   </body>
 </html>
