@@ -8,10 +8,74 @@
     <style></style>
     <script src="index.js"></script>
   </head>
-  <body>
-	<p>Currently Under Construction</p>
-        <canvas id="myCanvas" width="600" height="600" style="border:1px solid #000000;">
-        Your browser does not support the HTML canvas tag.
-        </canvas>
+ <body>
+    <canvas id="running-text" height=800px width=700px></canvas>
+    <script>
+      const word_color_pairs={
+        'cumsoft': '#ff844b',
+        'cumsoftgithub': '#82ff2e',
+        'cumsoft.wixsite.com': '#999999',
+        'Cumsoft': '#000000',
+        'cumsoftcumsoftcumsoft': '#ffffff',
+        'cumsoftcumsoft': '#f8008d',
+        'cumsoftcumsoft.github.io': '#ff30d3',
+      };
+      const getRandomKVPair=function(object)
+      {
+        const keys=Object.keys(object);
+        const rand_key=keys[Math.floor(Math.random()*keys.length)];
+        return {
+          'key': rand_key,
+          'value': object[rand_key],
+        };
+      };
+      const canvas=document.getElementById('running-text');
+      const canvas_context=canvas.getContext('2d');
+      let animation_id=undefined;
+      let word_x=0;
+      let word_y=10;
+      const stopRunning=function()
+      {
+        if(animation_id!==undefined)
+          window.clearInterval(animation_id);
+        animation_id=undefined;
+      };
+      const startRunning=function(word_color_pairs,canvas_background,interval)
+      {
+        const max_width=canvas.width;
+        const max_height=canvas.height;
+        //Blanket the canvas with the background.
+        canvas_context.fillStyle=canvas_background;
+        canvas_context.fillRect(0,0,max_width,max_height);
+        const run=function()
+        {
+          console.log('running');
+          if(word_y>max_height)
+          {
+            stopRunning();
+            return;
+          }
+          //Get info here.
+          const w_c_pair=getRandomKVPair(word_color_pairs);
+          //The actual width of the string measured in pixels according to the canvas.
+          const canvas_font_width=canvas_context.measureText(w_c_pair['key']+' ').width;
+          //The font color is set.
+          canvas_context.fillStyle=w_c_pair['value'];
+          //Render the random keyword.
+          canvas_context.fillText(w_c_pair['key']+' ',word_x,word_y);
+          //Update the rendering X-coordinate.
+          word_x+=canvas_font_width;
+          //If the X coordinate goes out of bounds, goto the beginning of the next line.
+          if(word_x>max_width)
+          {
+            word_x=1;
+            word_y+=10;
+          }
+        };
+        //Begin the animation.
+        animation_id=window.setInterval(run,interval);
+      };
+      startRunning(word_color_pairs,'#d9ead3',50);
+    </script>
   </body>
 </html>
