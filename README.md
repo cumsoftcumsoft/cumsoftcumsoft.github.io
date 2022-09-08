@@ -1,1 +1,11 @@
-##Cumsoftcumsoft.github.io
+##Cumsoftcumsoft.github.io Notes
+
+*
+*
+*
+*
+*
+*
+*
+*
+*
